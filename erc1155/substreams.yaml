@@ -1,0 +1,28 @@
+specVersion: v0.1.0
+package:
+  name: erc1155
+  version: v0.4.0
+  url: https://github.com/pinax-network/substreams-evm-tokens
+  description: ERC1155 events substreams package
+  image: ../image.png
+
+protobuf:
+  files:
+    - erc1155.proto
+  importPaths:
+    - ../proto/v1
+
+binaries:
+  default:
+    type: wasm/rust-v1
+    file: ../target/wasm32-unknown-unknown/release/erc1155.wasm
+
+modules:
+  - name: map_events
+    kind: map
+    inputs:
+      - source: sf.ethereum.type.v2.Block
+    output:
+      type: proto:evm.erc1155.v1.Events
+
+network: mainnet

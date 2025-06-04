@@ -1,0 +1,15 @@
+specVersion: v0.1.0
+package:
+  name: proto
+  version: v0.0.0
+
+protobuf:
+  files:
+    - v1/seaport.proto
+    - v1/erc721.proto
+    - v1/erc721-metadata.proto
+    - v1/erc1155.proto
+    - v1/erc1155-metadata.proto
+  excludePaths:
+    - sf/substreams
+    - google

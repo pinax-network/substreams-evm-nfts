@@ -1,0 +1,33 @@
+specVersion: v0.1.0
+package:
+  name: evm_erc721_metadata
+  version: v0.4.1
+  url: https://github.com/pinax-network/substreams-evm-tokens
+  description: ERC721 token metadata
+  image: ../image.png
+
+imports:
+  erc721: https://github.com/pinax-network/substreams-evm-tokens/releases/download/nfts-v0.4.0/erc721-v0.4.0.spkg
+
+protobuf:
+  files:
+    - erc721-metadata.proto
+  importPaths:
+    - ../proto/v1
+
+binaries:
+  default:
+    type: wasm/rust-v1
+    file: ../target/wasm32-unknown-unknown/release/erc721_metadata.wasm
+
+modules:
+  - name: map_events
+    kind: map
+    inputs:
+      - params: string
+      - map: erc721:map_events
+    output:
+      type: proto:evm.erc721.metadata.v1.Events
+
+params:
+  map_events: 25 # CHUNK_SIZE (Batch RPC Calls)

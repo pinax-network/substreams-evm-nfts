@@ -1,0 +1,17 @@
+[package]
+name = "erc721-metadata"
+description = "ERC721 metadata"
+version = { workspace = true }
+edition = { workspace = true }
+license = { workspace = true }
+authors = ["Yaro Shkvorets <yaro@pinax.network>"]
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+substreams = { workspace = true }
+substreams-ethereum = { workspace = true }
+substreams-abis = { workspace = true }
+common = { path = "../common" }
+proto = { path = "../proto" }
