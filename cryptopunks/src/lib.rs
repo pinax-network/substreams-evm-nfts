@@ -1,4 +1,4 @@
-use common::logs_with_caller;
+use common::{logs_with_caller, NULL_ADDRESS};
 use proto::pb::evm::erc721::v1::{Events, Transfer};
 use substreams_abis::evm::tokens::cryptopunks::events as cryptopunks;
 use substreams_ethereum::pb::eth::v2::Block;
@@ -26,6 +26,46 @@ fn map_events(block: Block) -> Result<Events, substreams::errors::Error> {
                     // -- event --
                     from: event.from.to_vec(),
                     to: event.to.to_vec(),
+                    token_id: event.punk_index.to_string(),
+                });
+            }
+
+            // -- Transfer (Assign) --
+            if let Some(event) = cryptopunks::Assign::match_and_decode(log) {
+                events.transfers.push(Transfer {
+                    // -- transaction --
+                    tx_hash: trx.hash.to_vec(),
+
+                    // -- call --
+                    caller: caller.clone(),
+
+                    // -- log --
+                    ordinal: log.ordinal,
+                    contract: log.address.to_vec(),
+
+                    // -- event --
+                    from: NULL_ADDRESS.to_vec(),
+                    to: event.to.to_vec(),
+                    token_id: event.punk_index.to_string(),
+                });
+            }
+
+            // -- Transfer (PunkBought) --
+            if let Some(event) = cryptopunks::PunkBought::match_and_decode(log) {
+                events.transfers.push(Transfer {
+                    // -- transaction --
+                    tx_hash: trx.hash.to_vec(),
+
+                    // -- call --
+                    caller: caller.clone(),
+
+                    // -- log --
+                    ordinal: log.ordinal,
+                    contract: log.address.to_vec(),
+
+                    // -- event --
+                    from: event.from_address.to_vec(),
+                    to: event.to_address.to_vec(),
                     token_id: event.punk_index.to_string(),
                 });
             }
