@@ -5,6 +5,7 @@ members = [
   "erc1155",
   "erc1155-metadata",
   "seaport",
+  "cryptopunks",
 
   # Common
   "proto",
