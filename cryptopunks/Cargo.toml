@@ -1,0 +1,17 @@
+[package]
+name = "cryptopunks"
+description = "CryptoPunks events"
+version = { workspace = true }
+edition = { workspace = true }
+license = { workspace = true }
+authors = ["Denis Carriere <denis@pinax.network>"]
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+substreams = { workspace = true }
+substreams-ethereum = { workspace = true }
+substreams-abis = { workspace = true }
+proto = { path = "../proto" }
+common = { path = "../common" }

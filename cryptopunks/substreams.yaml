@@ -1,0 +1,26 @@
+specVersion: v0.1.0
+package:
+  name: evm_cryptopunks
+  version: v0.1.0
+  url: https://github.com/pinax-network/substreams-evm-tokens
+  description: CryptoPunks events
+  image: ../image.png
+
+protobuf:
+  files:
+    - cryptopunks.proto
+  importPaths:
+    - ../proto/v1
+
+binaries:
+  default:
+    type: wasm/rust-v1
+    file: ../target/wasm32-unknown-unknown/release/cryptopunks.wasm
+
+modules:
+  - name: map_events
+    kind: map
+    inputs:
+      - source: sf.ethereum.type.v2.Block
+    output:
+      type: proto:evm.cryptopunks.v1.Events

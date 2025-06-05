@@ -3,19 +3,21 @@
 #[allow(clippy::derive_partial_eq_without_eq)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct Events {
+    /// "mint"
     #[prost(message, repeated, tag="1")]
     pub assigns: ::prost::alloc::vec::Vec<Assign>,
-    /// exclude `Transfer` since it is a duplicate event of ERC-20
     #[prost(message, repeated, tag="2")]
     pub punk_transfers: ::prost::alloc::vec::Vec<PunkTransfer>,
+    /// "transfer" via sale
     #[prost(message, repeated, tag="3")]
-    pub punk_offereds: ::prost::alloc::vec::Vec<PunkOffered>,
-    #[prost(message, repeated, tag="4")]
-    pub punk_bid_entereds: ::prost::alloc::vec::Vec<PunkBidEntered>,
-    #[prost(message, repeated, tag="5")]
-    pub punk_bid_withdrawns: ::prost::alloc::vec::Vec<PunkBidWithdrawn>,
-    #[prost(message, repeated, tag="6")]
     pub punk_boughts: ::prost::alloc::vec::Vec<PunkBought>,
+    #[prost(message, repeated, tag="4")]
+    pub punk_offereds: ::prost::alloc::vec::Vec<PunkOffered>,
+    #[prost(message, repeated, tag="5")]
+    pub punk_bid_entereds: ::prost::alloc::vec::Vec<PunkBidEntered>,
+    #[prost(message, repeated, tag="6")]
+    pub punk_bid_withdrawns: ::prost::alloc::vec::Vec<PunkBidWithdrawn>,
+    /// ❌ excludes `Transfer` since it is a duplicate event of ERC-20
     #[prost(message, repeated, tag="7")]
     pub punk_no_longer_for_sales: ::prost::alloc::vec::Vec<PunkNoLongerForSale>,
 }
@@ -97,9 +99,9 @@ pub struct PunkBought {
     /// uint256
     #[prost(string, tag="10")]
     pub punk_index: ::prost::alloc::string::String,
-    /// uint256
-    #[prost(string, tag="11")]
-    pub value: ::prost::alloc::string::String,
+    /// uint256 (<https://github.com/pinax-network/substreams-evm-nfts/issues/1>)
+    #[prost(string, optional, tag="11")]
+    pub value: ::core::option::Option<::prost::alloc::string::String>,
     #[prost(bytes="vec", tag="12")]
     pub from_address: ::prost::alloc::vec::Vec<u8>,
     #[prost(bytes="vec", tag="13")]

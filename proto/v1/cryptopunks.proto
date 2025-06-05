@@ -3,14 +3,14 @@ syntax = "proto3";
 package evm.cryptopunks.v1;
 
 message Events {
-  repeated Assign assigns = 1;
-  // exclude `Transfer` since it is a duplicate event of ERC-20
+  repeated Assign assigns = 1; // "mint"
   repeated PunkTransfer punk_transfers = 2;
-  repeated PunkOffered punk_offereds = 3;
-  repeated PunkBidEntered punk_bid_entereds = 4;
-  repeated PunkBidWithdrawn punk_bid_withdrawns = 5;
-  repeated PunkBought punk_boughts = 6;
+  repeated PunkBought punk_boughts = 3; // "transfer" via sale
+  repeated PunkOffered punk_offereds = 4;
+  repeated PunkBidEntered punk_bid_entereds = 5;
+  repeated PunkBidWithdrawn punk_bid_withdrawns = 6;
   repeated PunkNoLongerForSale punk_no_longer_for_sales = 7;
+  // ❌ excludes `Transfer` since it is a duplicate event of ERC-20
 }
 
 message Assign {
@@ -59,7 +59,7 @@ message PunkBought {
 
   // -- event --
   string punk_index = 10; // uint256
-  string value = 11; // uint256
+  optional string value = 11; // uint256 (https://github.com/pinax-network/substreams-evm-nfts/issues/1)
   bytes from_address = 12;
   bytes to_address = 13;
 }
