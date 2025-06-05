@@ -1,5 +1,12 @@
 // @generated
 pub mod evm {
+    pub mod cryptopunks {
+        // @@protoc_insertion_point(attribute:evm.cryptopunks.v1)
+        pub mod v1 {
+            include!("evm.cryptopunks.v1.rs");
+            // @@protoc_insertion_point(evm.cryptopunks.v1)
+        }
+    }
     pub mod erc1155 {
         pub mod metadata {
             // @@protoc_insertion_point(attribute:evm.erc1155.metadata.v1)

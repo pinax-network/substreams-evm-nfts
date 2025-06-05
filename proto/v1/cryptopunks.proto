@@ -1,0 +1,131 @@
+syntax = "proto3";
+
+package evm.cryptopunks.v1;
+
+message Events {
+  repeated Assign assigns = 1;
+  // exclude `Transfer` since it is a duplicate event of ERC-20
+  repeated PunkTransfer punk_transfers = 2;
+  repeated PunkOffered punk_offereds = 3;
+  repeated PunkBidEntered punk_bid_entereds = 4;
+  repeated PunkBidWithdrawn punk_bid_withdrawns = 5;
+  repeated PunkBought punk_boughts = 6;
+  repeated PunkNoLongerForSale punk_no_longer_for_sales = 7;
+}
+
+message Assign {
+  // -- transaction --
+  bytes tx_hash = 1;
+
+  // -- caller --
+  optional bytes caller = 2; // call.caller (only available in Extended blocks)
+
+  // -- log --
+  bytes contract = 3; // log.address
+  uint64 ordinal = 4; // log.ordinal
+
+  // -- event --
+  bytes to = 10;
+  string punk_index = 11; // uint256
+}
+
+message PunkTransfer {
+  // -- transaction --
+  bytes tx_hash = 1;
+
+  // -- caller --
+  optional bytes caller = 2; // call.caller (only available in Extended blocks)
+
+  // -- log --
+  bytes contract = 3; // log.address
+  uint64 ordinal = 4; // log.ordinal
+
+  // -- event --
+  bytes from = 10;
+  bytes to = 11;
+  string punk_index = 12; // uint256
+}
+
+message PunkBought {
+  // -- transaction --
+  bytes tx_hash = 1;
+
+  // -- caller --
+  optional bytes caller = 2; // call.caller (only available in Extended blocks)
+
+  // -- log --
+  bytes contract = 3; // log.address
+  uint64 ordinal = 4; // log.ordinal
+
+  // -- event --
+  string punk_index = 10; // uint256
+  string value = 11; // uint256
+  bytes from_address = 12;
+  bytes to_address = 13;
+}
+
+message PunkBidEntered {
+  // -- transaction --
+  bytes tx_hash = 1;
+
+  // -- caller --
+  optional bytes caller = 2; // call.caller (only available in Extended blocks)
+
+  // -- log --
+  bytes contract = 3; // log.address
+  uint64 ordinal = 4; // log.ordinal
+
+  // -- event --
+  string punk_index = 10; // uint256
+  string value = 11; // uint256
+  bytes from_address = 12;
+}
+
+message PunkBidWithdrawn {
+  // -- transaction --
+  bytes tx_hash = 1;
+
+  // -- caller --
+  optional bytes caller = 2; // call.caller (only available in Extended blocks)
+
+  // -- log --
+  bytes contract = 3; // log.address
+  uint64 ordinal = 4; // log.ordinal
+
+  // -- event --
+  string punk_index = 10; // uint256
+  string value = 11; // uint256
+  bytes from_address = 12;
+}
+
+message PunkNoLongerForSale {
+  // -- transaction --
+  bytes tx_hash = 1;
+
+  // -- caller --
+  optional bytes caller = 2; // call.caller (only available in Extended blocks)
+
+  // -- log --
+  bytes contract = 3; // log.address
+  uint64 ordinal = 4; // log.ordinal
+
+  // -- event --
+  string punk_index = 10; // uint256
+}
+
+message PunkOffered {
+  // -- transaction --
+  bytes tx_hash = 1;
+
+  // -- caller --
+  optional bytes caller = 2; // call.caller (only available in Extended blocks)
+
+  // -- log --
+  bytes contract = 3; // log.address
+  uint64 ordinal = 4; // log.ordinal
+
+  // -- event --
+  string punk_index = 10; // uint256
+  string min_value = 11; // uint256
+  bytes to_address = 12;
+}

@@ -1,9 +1,9 @@
 specVersion: v0.1.0
 package:
-  name: evm_cryptopunks
+  name: evm_erc721_cryptopunks
   version: v0.1.0
   url: https://github.com/pinax-network/substreams-evm-tokens
-  description: CryptoPunks ERC721 events
+  description: ERC721 compatible events for CryptoPunks
   image: ../image.png
 
 protobuf:
@@ -15,7 +15,7 @@ protobuf:
 binaries:
   default:
     type: wasm/rust-v1
-    file: ../target/wasm32-unknown-unknown/release/cryptopunks.wasm
+    file: ../target/wasm32-unknown-unknown/release/erc721_cryptopunks.wasm
 
 modules:
   - name: map_events

@@ -1,6 +1,4 @@
-# `CryptoPunks`
-
-> Compatible with ERC721 events
+# ERC721 compatible events for `CryptoPunks`
 
 ## Includes
 

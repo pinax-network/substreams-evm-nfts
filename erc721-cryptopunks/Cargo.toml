@@ -1,6 +1,6 @@
 [package]
-name = "cryptopunks"
-description = "CryptoPunks compatible with ERC721 standard"
+name = "erc721-cryptopunks"
+description = "ERC721 compatible events for CryptoPunks"
 version = { workspace = true }
 edition = { workspace = true }
 license = { workspace = true }
