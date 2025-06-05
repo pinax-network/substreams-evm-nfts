@@ -6,6 +6,9 @@ package:
   description: ERC721 compatible events for CryptoPunks
   image: ../image.png
 
+imports:
+  cryptopunks: https://github.com/pinax-network/substreams-evm-nfts/releases/download/cryptopunks-v0.1.0/evm-cryptopunks-v0.1.0.spkg
+
 protobuf:
   files:
     - erc721.proto
@@ -21,6 +24,6 @@ modules:
   - name: map_events
     kind: map
     inputs:
-      - source: sf.ethereum.type.v2.Block
+      - map: cryptopunks:map_events
     output:
       type: proto:evm.erc721.v1.Events

@@ -1,8 +1,8 @@
-use common::{logs_with_caller, Address, NULL_ADDRESS};
+use common::{logs_with_caller, Address};
 use proto::pb::evm::cryptopunks;
 use substreams_abis::evm::tokens::cryptopunks::events;
 use substreams_ethereum::pb::eth::v2::Block;
-use substreams_ethereum::Event;
+use substreams_ethereum::{Event, NULL_ADDRESS};
 
 #[substreams::handlers::map]
 fn map_events(block: Block) -> Result<cryptopunks::v1::Events, substreams::errors::Error> {
